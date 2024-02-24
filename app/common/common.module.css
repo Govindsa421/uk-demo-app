@@ -1,0 +1,19 @@
+.imgLeftTextRight {
+  display: flex;
+  align-items: center;
+}
+
+.imgLeftTextRight .left {
+  flex: 1; /* Take up remaining space */
+}
+
+.imgLeftTextRight .right {
+  flex: 1; /* Take up remaining space */
+  text-align: left; /* Adjust text alignment */
+  padding-left: 20px; /* Add some space between imgLnd Txt */
+}
+
+/* .imgLeftTextRight img {
+  max-width: 100%;
+  height: auto;
+} */
