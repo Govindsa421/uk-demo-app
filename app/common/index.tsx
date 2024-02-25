@@ -1,38 +1,63 @@
+"use client";
 import Image from "next/image";
-import React from "react";
+import React, { useRef } from "react";
+import { motion, useInView } from "framer-motion";
+// import { slideInFromLeft, slideInFromRight } from "../utils/motion";
 // import styles from "./common.module.css";
 
 interface ImageTextLayoutProps {
   imgUrl: string;
   title: string;
   content: string;
-  contentDirection: "flex-row" | "flex-row-reverse";
+  header?: string;
+  contentDirection: string;
 }
 const ImageTextLayout = ({
   imgUrl,
   title,
   content,
-  contentDirection = "flex-row",
+  header,
+  contentDirection = "md:flex-row flex-col",
 }: ImageTextLayoutProps) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
   return (
-    <div className="px-20 py-20">
-      <div className={`flex items-center ${contentDirection}`}>
-        <div className="flex-1">
+    <motion.div
+      ref={ref}
+      style={{
+        transform: isInView ? "none" : "translateX(-200px)",
+        opacity: isInView ? 1 : 0,
+        transition: "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 0.5s",
+      }}
+      className="lg:px-20 px-6 lg:py-20 py-6"
+    >
+      <motion.div
+        className={`flex items-center mx-auto max-w-6xl ${contentDirection}`}
+      >
+        <motion.div
+          className="flex-auto py-10 lg:py-0"
+          style={{
+            transform: isInView ? "none" : "translateX(200px)",
+            opacity: isInView ? 1 : 0,
+            transition: "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 0.5s",
+          }}
+        >
           <Image
             src={imgUrl}
             alt={imgUrl}
             width={100}
             height={100}
-            className="w-80 h-96 object-cover mx-auto"
+            className="lg:w-80 w-64 lg:h-96 h-80 object-cover mx-auto"
             style={{ boxShadow: "30px -30px #000" }}
           />
-        </div>
-        <div className="flex-1 text-left space-y-4 ">
-          <h1 className="font-bold text-xl">{title}</h1>
-          <p>{content}</p>
-        </div>
-      </div>
-    </div>
+        </motion.div>
+        <motion.div className="flex-auto lg:w-60 w-full space-y-4 ">
+          <h2 className="  uppercase">{header}</h2>
+          <h1 className="font-bold lg:text-xl text-lg">{title}</h1>
+          <p className="">{content}</p>
+        </motion.div>
+      </motion.div>
+    </motion.div>
   );
 };
 

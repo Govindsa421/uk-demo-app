@@ -1,8 +1,16 @@
+"use client";
+import React, { useRef } from "react";
+import { useInView, motion } from "framer-motion";
 import Image from "next/image";
-import React from "react";
-// import stylex from '@stylexjs/stylex';
 
 const Cards = () => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
+
+  const cardVariants = {
+    initial: { y: 50, opacity: 0 },
+    animate: { y: 0, opacity: 1 },
+  };
   const card = [
     {
       id: 0,
@@ -27,89 +35,58 @@ const Cards = () => {
     },
   ];
   return (
-    <div className="py-20 lg:px-20 px-6  ">
-      <div className="space-y-6 text-center  ">
-        <p>WHAT WE DO</p>
-        <h1 className="text-3xl font-bold">
-          As pioneers in the drone technology landscape, we provide cutting-edge
-          solutions designed for today’s complex challenges.
-        </h1>
-        <p className="text-md">
-          Our objective is to utilize swarm technology to deliver the precision
-          and efficiency that our clients require for the successful completion
-          of their initiatives. We are committed to enhancing businesses and
-          bettering lives through cutting-edge drone swarm technologies and AI
-          solutions.
-        </p>
+    <motion.div className="lg:py-20 py-10 lg:px-20 px-6 " ref={ref}>
+      <div className="mx-auto max-w-6xl">
+        <motion.div
+          className="space-y-6 text-center  "
+          style={{
+            transform: isInView ? "none" : "translateX(-200px)",
+            opacity: isInView ? 1 : 0,
+            transition: "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 0.5s",
+          }}
+        >
+          <p>WHAT WE DO</p>
+          <h1 className="lg:text-3xl text-lg font-bold">
+            As pioneers in the drone technology landscape, we provide
+            cutting-edge solutions designed for today’s complex challenges.
+          </h1>
+          <p className="lg:text-md text-sm">
+            Our objective is to utilize swarm technology to deliver the
+            precision and efficiency that our clients require for the successful
+            completion of their initiatives. We are committed to enhancing
+            businesses and bettering lives through cutting-edge drone swarm
+            technologies and AI solutions.
+          </p>
+        </motion.div>
+        <motion.div className=" grid lg:grid-cols-3 md:grid-cols-2 gap-8 lg:mt-10 mt-6 ">
+          {card.map((crd) => {
+            return (
+              <motion.div
+                key={crd.id}
+                variants={cardVariants}
+                initial="initial"
+                animate={isInView ? "animate" : "initial"}
+                transition={{ duration: 0.3, delay: crd.id * 0.4 }}
+                className="grid gap-3 text-center p-5 rounded shadow-md border"
+              >
+                <div className="mx-auto">
+                  <Image
+                    src={crd.img}
+                    alt={crd.img}
+                    width={55}
+                    height={55}
+                    className="bg-gray-300 rounded-full p-2"
+                  />
+                </div>
+                <h1 className="lg:text-xl text-lg font-bold">{crd.title}</h1>
+                <p className="lg:text-md text-sm ">{crd.content}</p>
+              </motion.div>
+            );
+          })}
+        </motion.div>
       </div>
-      <div className=" grid lg:grid-cols-3 md:grid-cols-2 gap-8 mt-10 ">
-        {card.map((crd) => {
-          return (
-            <div
-              key={crd.id}
-              className="grid gap-3 text-center p-5 rounded shadow-md border"
-            >
-              <div className="mx-auto">
-                <Image
-                  src={crd.img}
-                  alt={crd.img}
-                  width={55}
-                  height={55}
-                  className="bg-gray-300 rounded-full p-2"
-                />
-              </div>
-              <h1 className="text-xl font-bold">{crd.title}</h1>
-              <p>{crd.content}</p>
-            </div>
-          );
-        })}
-      </div>
-      {/* <div {...stylex.props(cardStyles.cardWrapper)}>
-        {card.map((crd) => {
-          return (
-            <div key={crd.id} {...stylex.props(cardStyles.cardContainer)}>
-              <h1 {...stylex.props(cardStyles.cardTitle)}>{crd.title}</h1>
-              <p {...stylex.props(cardStyles.cardContent)}>{crd.content}</p>
-            </div>
-          );
-        })}
-      </div> */}
-    </div>
+    </motion.div>
   );
 };
 
 export default Cards;
-
-// const MOBILE = '@media (max-width: 700px)';
-// const cardStyles = stylex.create({
-//   cardWrapper: {
-//     display: {
-//       default: 'flex',
-//       [MOBILE]: 'block',
-//     },
-//     gap: {
-//       default: '2rem',
-//       [MOBILE]: '1rem',
-//     },
-//     // marginTop: '2rem',
-//   },
-//   cardContainer: {
-//     display: 'grid',
-//     placeItems: 'center',
-//     // gap: '2rem',
-//     // gap: {
-//     //   default: '2rem',
-//     //   [MOBILE]: '1rem',
-//     // },
-//     border: '1px solid gray',
-//     borderRadius: '3px',
-//     padding: '10px',
-//     marginBottom: '1rem',
-//   },
-//   cardTitle: {
-//     fontSize: '1.5rem',
-//   },
-//   cardContent: {
-//     fontSize: '1rem',
-//   },
-// });
