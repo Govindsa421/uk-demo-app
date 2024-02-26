@@ -7,10 +7,10 @@ const Cards = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
 
-  const cardVariants = {
-    initial: { y: 50, opacity: 0 },
-    animate: { y: 0, opacity: 1 },
-  };
+  // const cardVariants = {
+  //   initial: { y: 50, opacity: 0 },
+  //   animate: { y: 0, opacity: 1 },
+  // };
   const card = [
     {
       id: 0,
@@ -35,7 +35,11 @@ const Cards = () => {
     },
   ];
   return (
-    <motion.div className="lg:py-20 py-10 lg:px-20 px-6 " ref={ref}>
+    <motion.div
+      className="lg:py-20 py-10 lg:px-20 px-6 "
+      ref={ref}
+      id="what_we_do"
+    >
       <div className="mx-auto max-w-6xl">
         <motion.div
           className="space-y-6 text-center  "
@@ -58,16 +62,16 @@ const Cards = () => {
             technologies and AI solutions.
           </p>
         </motion.div>
-        <motion.div className=" grid lg:grid-cols-3 md:grid-cols-2 gap-8 lg:mt-10 mt-6 ">
+        <motion.div className=" grid lg:grid-cols-3 md:grid-cols-2 gap-8 lg:mt-10 mt-6   ">
           {card.map((crd) => {
             return (
               <motion.div
                 key={crd.id}
-                variants={cardVariants}
-                initial="initial"
-                animate={isInView ? "animate" : "initial"}
-                transition={{ duration: 0.3, delay: crd.id * 0.4 }}
-                className="grid gap-3 text-center p-5 rounded shadow-md border"
+                // variants={cardVariants}
+                // initial="initial"
+                // animate={isInView ? "animate" : "initial"}
+                // transition={{ duration: 0.3, delay: crd.id * 0.4 }}
+                className="grid gap-3 text-center p-5 rounded shadow-md border hover:scale-105 group  hover:bg-gray-300 cursor-pointer duration-300"
               >
                 <div className="mx-auto">
                   <Image
@@ -75,10 +79,10 @@ const Cards = () => {
                     alt={crd.img}
                     width={55}
                     height={55}
-                    className="bg-gray-300 rounded-full p-2"
+                    className="group-hover:bg-white bg-gray-300 rounded-full p-2"
                   />
                 </div>
-                <h1 className="lg:text-xl text-lg font-bold">{crd.title}</h1>
+                <h1 className="lg:text-lg text-md font-bold">{crd.title}</h1>
                 <p className="lg:text-md text-sm ">{crd.content}</p>
               </motion.div>
             );

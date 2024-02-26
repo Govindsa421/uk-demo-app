@@ -4,7 +4,7 @@ import ImageTextLayout from "@/app/common";
 
 const About = () => {
   return (
-    <div className="bg-[#f3f4f6]">
+    <div className="bg-[#f3f4f6]" id="about">
       <ImageTextLayout
         contentDirection="md:flex-row flex-col"
         header="About Us"

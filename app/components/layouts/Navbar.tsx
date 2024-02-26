@@ -1,12 +1,15 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import Link from "next/link";
+// import Link from "next/link";
+// eslint-disable-next-line import/named
+import { Link } from "react-scroll";
 // import { CustomIcon } from "@/app/custom/icon/CustomIcon";
 import styles from "./button.module.css";
 
 const routes = [
-  { id: 0, path: "/", title: "About" },
-  { id: 1, path: "/", title: "Contact" },
+  { id: 0, path: "about", title: "About" },
+  { id: 1, path: "contact", title: "Contact" },
+  { id: 2, path: "what_we_do", title: "What We Do" },
 ];
 const Navbar = () => {
   const [nav, setNav] = useState(false);
@@ -36,13 +39,27 @@ const Navbar = () => {
       className="fixed w-full duration-500 text-white px-6 md:px-20 py-6 z-10"
     >
       <div className="mx-auto max-w-6xl">
-        <div className="flex justify-between items-center font-bold">
-          <Link href="/" as="/">
+        <div className="flex justify-between items-center font-bold cursor-pointer">
+          <Link
+            to="banner"
+            spy={true}
+            smooth={true}
+            offset={-100}
+            duration={500}
+          >
             LOGO
           </Link>
           <div className="hidden list-none sm:flex ">
             {routes.map((el) => (
-              <Link href={el.path} key={el.path}>
+              <Link
+                to={el.path}
+                spy={true}
+                smooth={true}
+                offset={-100}
+                duration={500}
+                // href={el.path}
+                key={el.path}
+              >
                 <p
                   onClick={() => navbarHandle(el.title)}
                   className={`ml-6  duration-300 rounded ${
@@ -80,7 +97,13 @@ const Navbar = () => {
                   className="p-4 text-3xl hover:text-gray-500"
                   onClick={handleNav}
                 >
-                  <Link href={el.path} as={el.path}>
+                  <Link
+                    to={el.path}
+                    spy={true}
+                    smooth={true}
+                    offset={-100}
+                    duration={500}
+                  >
                     {el.title}
                   </Link>
                 </li>

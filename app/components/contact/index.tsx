@@ -2,7 +2,7 @@ import React from "react";
 
 const Contact = () => {
   return (
-    <div className="bg-[#000000de]">
+    <div className="bg-[#000000de]" id="contact">
       <div className="uppercase text-center text-white pt-10">
         <h1>contact Us</h1>
       </div>
@@ -41,7 +41,7 @@ const Contact = () => {
               className="p-2 w-full mt-6 rounded outline-none bg-[#454545]"
             />
             <div className="mt-2">
-              <button className="px-6 py-2 bg-black text-white font-bold rounded">
+              <button className="px-6 py-2 bg-gray-500 text-white font-bold rounded">
                 Submit
               </button>
             </div>

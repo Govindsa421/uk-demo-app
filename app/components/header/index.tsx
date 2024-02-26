@@ -8,12 +8,7 @@ const Header = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
   return (
-    <motion.div
-      ref={ref}
-      // initial="hidden"
-      // animate="visible"
-      className=" relative w-full "
-    >
+    <motion.div ref={ref} className=" relative w-full" id="banner">
       <div className="absolute w-full h-full">
         <Image
           src="https://images.unsplash.com/photo-1689443111384-1cf214df988a?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
