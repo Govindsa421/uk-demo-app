@@ -1,7 +1,6 @@
 "use client";
 import React, { useRef } from "react";
 import { useInView, motion } from "framer-motion";
-import Image from "next/image";
 import { CustomIcon } from "@/app/custom/icon/CustomIcon";
 
 const Cards = () => {
